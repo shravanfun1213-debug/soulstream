@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AetherSync | Discovery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(233, 213, 255, 0.1);
+        }
+        .active-glow {
+            box-shadow: 0 0 20px 0px rgba(251, 113, 129, 0.15);
+        }
+        .sync-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #081425;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a3548;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#2a3548",
+                    "outline": "#909097",
+                    "surface-container": "#152031",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "primary-container": "#0f172a",
+                    "on-primary-fixed": "#131b2e",
+                    "on-surface": "#d8e3fb",
+                    "inverse-on-surface": "#263143",
+                    "inverse-primary": "#565e74",
+                    "surface-tint": "#bec6e0",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#d2bfe8",
+                    "secondary": "#d2bfe8",
+                    "surface-container-lowest": "#040e1f",
+                    "on-secondary-fixed-variant": "#4f4062",
+                    "background": "#081425",
+                    "primary-fixed": "#dae2fd",
+                    "inverse-surface": "#d8e3fb",
+                    "primary": "#bec6e0",
+                    "surface-container-high": "#1f2a3c",
+                    "surface-container-low": "#111c2d",
+                    "on-primary": "#283044",
+                    "on-tertiary-fixed-variant": "#891933",
+                    "secondary-container": "#4f4062",
+                    "outline-variant": "#45464d",
+                    "surface-bright": "#2f3a4c",
+                    "on-error": "#690005",
+                    "secondary-fixed": "#eddcff",
+                    "on-secondary": "#382a4a",
+                    "on-surface-variant": "#c6c6cd",
+                    "on-tertiary": "#67001f",
+                    "error": "#ffb4ab",
+                    "surface-dim": "#081425",
+                    "surface-container-highest": "#2a3548",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#400010",
+                    "on-background": "#d8e3fb",
+                    "on-secondary-container": "#c0aed6",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface": "#081425",
+                    "tertiary-container": "#38000d",
+                    "on-secondary-fixed": "#221534",
+                    "on-tertiary-container": "#d65569"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "120px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "xs": "8px",
+                    "sm": "16px",
+                    "base": "4px",
+                    "md": "24px",
+                    "margin-mobile": "20px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Bricolage Grotesque"],
+                    "headline-lg": ["Bricolage Grotesque"],
+                    "body-lg": ["DM Sans"],
+                    "label-md": ["DM Sans"],
+                    "headline-md": ["Bricolage Grotesque"],
+                    "body-md": ["DM Sans"],
+                    "label-sm": ["DM Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32 overflow-x-hidden">
+<!-- Background Atmospheric Effect -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+
+</div>
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl h-16 flex justify-between items-center px-margin-mobile md:px-margin-desktop">
+<div class="font-headline-md text-headline-md font-bold text-primary tracking-tight">AetherSync</div>
+<div class="hidden md:flex gap-md">
+<a class="text-on-surface-variant font-bold hover:text-primary transition-colors" href="#">Listen</a>
+<a class="text-on-surface-variant font-bold hover:text-primary transition-colors" href="#">Queue</a>
+<a class="text-on-surface-variant font-bold hover:text-primary transition-colors" href="#">Library</a>
+<a class="text-primary font-bold transition-colors" href="#">Feed</a>
+</div>
+<div class="flex items-center gap-sm">
+<button class="material-symbols-outlined text-primary scale-95 active:opacity-80 transition-transform">favorite</button>
+<button class="material-symbols-outlined text-primary scale-95 active:opacity-80 transition-transform">chat_bubble</button>
+<div class="relative w-10 h-10">
+<div class="absolute inset-0 bg-tertiary rounded-full sync-pulse"></div>
+<img alt="Avatar" class="relative w-10 h-10 rounded-full border-2 border-background object-cover" data-alt="A close-up portrait of a serene young partner with soft lighting and a warm, intimate atmosphere. The visual style is premium and cinematic, utilizing a palette of deep navy and soft rose pink to match the modern minimalism of the AetherSync app design system. The lighting is low-key, emphasizing emotional connection and digital sanctuary aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI0gdR3GQsc_-pbZywOGzFjPddE_BJHyNLQV3dyL5hA-1eTY0r56e9EwGWvIQxpDG4gp3JjaRGhhFYiN-9mz8zQuXCvhvnYuNrWW52aBe3JNQX770X9r7EUdl2RUGP2KuMKLjsDQFvnbGdmxM-7mTBTZh1z3JqBc_ICHUUbgqE2_IXj3w7hdry6Yw6SToTMc1msLuy8z1O91WytTlbOqcjWotRmAcVaSVpIcsoRGGevFL1ZXCbvLVz9w"/>
+</div>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile md:px-margin-desktop max-w-[1200px] mx-auto space-y-lg">
+<!-- Header Section -->
+<section>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Shared Rhythms</h1>
+<p class="text-on-surface-variant mt-2 font-body-lg">Curated for you and Alex. Your digital sanctuary, synced.</p>
+</section>
+<!-- Date Night Mixes (Bento Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-sm">
+<div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-xl glass-card aspect-square md:aspect-auto h-full flex flex-col justify-end p-md">
+<div class="absolute inset-0 z-0">
+<img alt="Mix Cover" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="An artistic, abstract representation of two people's silhouettes intertwining through glowing musical waves in a deep, dark blue space. The imagery is dreamlike and intimate, featuring soft rose pink and lavender light streaks. The aesthetic is clean and high-end, representing a 'Date Night Mix' for a couple using a premium music synchronization platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWkbbP2fklMZmCBMhyzcwWhZb-sLtMS1Ek0TfBS1bMVozF8fPxQsxxCtMcKUyoHFMrOoUlCsYije5zgUbfDNLF8aO4cT1LFdrqtqB6TVPDX3r7TGs-suZzhuKsm1MMaQisJ3-VyLh9-zW0xukOPVqudwIn7Y-JDrFNTV_t-1WCnQZGUPDqUsseZWR6PmVCNq2CtZ2h56DGpeWCKDR8WZPorW4h5TMo0M9yDRMHKlNvPjtwakY8PPRpiQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+</div>
+<div class="relative z-10">
+<div class="text-tertiary-fixed font-label-sm uppercase tracking-widest mb-1">Our Weekly Highlight</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Midnight Reverie Mix</h2>
+<p class="text-on-surface-variant font-body-md mt-1">32 songs curated from your shared nights.</p>
+<button class="mt-4 bg-[#FB7185] text-white px-md py-sm rounded-full font-bold flex items-center gap-xs hover:shadow-[0_0_15px_rgba(251,113,129,0.5)] transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                        Play Together
+                    </button>
+</div>
+</div>
+<div class="md:col-span-2 glass-card rounded-xl p-md flex gap-md items-center">
+<div class="w-24 h-24 rounded-lg overflow-hidden shrink-0">
+<img alt="Mix" class="w-full h-full object-cover" data-alt="A minimalist photograph of a vinyl record spinning on a modern turntable with neon lavender highlights reflecting off the surface. The background is a deep navy blue, creating a quiet and premium atmosphere. The style is cinematic and intimate, fitting for a curated 'Romantic' playlist in a couple's shared music app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi8i2TAc7TDEioqBBUfSQxJysPRUPfw_L017KV5FaX73K3abbuX9vARKK9Azj_3dKlXmzELeOlrF_0Ca4L16aRvrvECzqEboFWG2JVh-SSkwEWQJNcJhE29h1GjZSZTMwtlkvT9nJi74H2aMvGcRyd3-ZdDeeZUGeBp6KvtbwsjLn9R4sa-u3napAYM_EilLewe-tdExV27WW768FIiPFsi-MO4WRpcdbGGDo54nRgYaDiVQnvvVd4Jg"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight">After Hours</h3>
+<p class="text-on-surface-variant font-body-md mt-1">Soft jazz and lo-fi beats for winding down.</p>
+</div>
+</div>
+<div class="md:col-span-2 glass-card rounded-xl p-md flex gap-md items-center">
+<div class="w-24 h-24 rounded-lg overflow-hidden shrink-0">
+<img alt="Mix" class="w-full h-full object-cover" data-alt="A macro shot of vibrant pink and blue ink swirling together in water, creating a sense of energy and fluidity. The lighting is bright yet atmospheric, with a dark background to make the colors pop. The image represents an 'Energetic' mood for a shared couple's playlist, emphasizing modern minimalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAU35WV8A7WcF66WrQ8mWM1D73Mr6lTCg8A1e2iCGFX6kgWOApWJ91sCe6HvtT4R7Hi8k5jiWTHHDa8AIt6s025XV7cl_P6deTqkothCW-bx9BjGn1hEGA4DgHW1fEvEjKrvZ8hibhbPtYY-c2BmRmlG7Ka1xXWHbvqi-cuU43DQYCWDK02w1WJoiuP6n5R3EFMey2aPtZH6nXYxZj5khq1788clF82-0-mIBqmFXTwss1xSmEC4r03w"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight">Sunrise Beats</h3>
+<p class="text-on-surface-variant font-body-md mt-1">Start your morning in perfect sync.</p>
+</div>
+</div>
+</section>
+<!-- Mood-based Playlists -->
+<section>
+<div class="flex justify-between items-end mb-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">Choose Your Mood</h2>
+<a class="text-primary font-label-md hover:underline" href="#">View All</a>
+</div>
+<div class="flex gap-sm overflow-x-auto pb-4 no-scrollbar">
+<!-- Mood Card: Romantic -->
+<div class="min-w-[160px] flex-col items-center glass-card p-sm rounded-xl text-center group cursor-pointer hover:border-tertiary/40 transition-colors">
+<div class="w-full aspect-square rounded-full bg-tertiary-container/30 flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-tertiary text-4xl group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<span class="font-bold text-on-surface">Romantic</span>
+</div>
+<!-- Mood Card: Chill -->
+<div class="min-w-[160px] flex-col items-center glass-card p-sm rounded-xl text-center group cursor-pointer hover:border-primary/40 transition-colors">
+<div class="w-full aspect-square rounded-full bg-primary-container/30 flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform">cloud</span>
+</div>
+<span class="font-bold text-on-surface">Chill</span>
+</div>
+<!-- Mood Card: Energetic -->
+<div class="min-w-[160px] flex-col items-center glass-card p-sm rounded-xl text-center group cursor-pointer hover:border-secondary/40 transition-colors">
+<div class="w-full aspect-square rounded-full bg-secondary-container/30 flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-secondary text-4xl group-hover:scale-110 transition-transform">bolt</span>
+</div>
+<span class="font-bold text-on-surface">Energetic</span>
+</div>
+<!-- Mood Card: Focus -->
+<div class="min-w-[160px] flex-col items-center glass-card p-sm rounded-xl text-center group cursor-pointer hover:border-outline/40 transition-colors">
+<div class="w-full aspect-square rounded-full bg-surface-variant/30 flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-outline text-4xl group-hover:scale-110 transition-transform">auto_stories</span>
+</div>
+<span class="font-bold text-on-surface">Focus</span>
+</div>
+</div>
+</section>
+<!-- Partner Feed (Tracks they liked/added) -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Shared Moments Feed</h2>
+<div class="space-y-sm">
+<!-- Feed Item 1 -->
+<div class="glass-card rounded-xl p-md flex items-center gap-md group">
+<div class="relative shrink-0">
+<img alt="Track Art" class="w-16 h-16 rounded-lg object-cover" data-alt="A stylized album cover featuring a lone glowing light in a vast, dark field under a starry night sky. The image uses a palette of deep navy and soft rose, conveying a sense of quiet longing and intimacy. It is a high-end, minimalist visual representing a track in a couple's shared music feed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRy7xjDLWzA2Sh9TiYSnpbxjTGCp0LgQdT77GAGANCAVAGZuTc2C8JvWMx6KGL0INiHhfjxVdd2iG-YSn5VsWkpkhyEgIdTUCw4_jIJGIkmdWlu6VRJQgaJV6r2WHvlz26WfzjLWjMJLEoj4vNtN1oTGjEE2jcg8zeS9rwnJzscim0wf4s-Ul3GXG33tk2Il70nBzyCPgHvbQMOSwQgYHzKvenOrqZGylc1gOVQlf_qL6RWbNi1Vb0EQ"/>
+<div class="absolute -top-1 -right-1 w-6 h-6 border-2 border-background bg-tertiary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-white" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="flex-grow">
+<p class="text-on-surface-variant font-label-sm">Alex liked a track 10m ago</p>
+<h4 class="font-bold text-on-surface text-lg">Stellar Drift</h4>
+<p class="text-on-surface-variant font-label-md">Celestial Echoes</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-tertiary/20 transition-all">
+<span class="material-symbols-outlined text-primary">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined text-primary">add</span>
+</button>
+</div>
+</div>
+<!-- Feed Item 2 -->
+<div class="glass-card rounded-xl p-md flex items-center gap-md group">
+<div class="relative shrink-0">
+<img alt="Track Art" class="w-16 h-16 rounded-lg object-cover" data-alt="Abstract art showcasing geometric planes in shades of slate blue and muted lavender. The lighting is soft and diffuse, creating a modern, premium feel. The visual is designed to represent a contemporary electronic music track's album art in a high-end couple's music synchronization app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9Wav179YfZt5L3o1LcD3jCkRbJi737b_1wmMTLCNsDPJocBJ9CoRNjDr9O-8qbVvgcx9A5XTkvp58pMfIb6tOGuermPsfF1K4D3qtTqU5r9QeLQxsfkQLLFAcxDNXvBADZZ5qZt2MLtX-Anre_ZrNKU2Ls-VIB-2RbFhOejL-m5J_Wi_Pcs8n6wvExs6-1gdfhpSoSkeKc4zFexAxOvzD-3Ofuj3Qv6N7Ka7VRPddLKFwM_hXhgwC9w"/>
+<div class="absolute -top-1 -right-1 w-6 h-6 border-2 border-background bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-on-primary" style="font-variation-settings: 'FILL' 1;">queue_music</span>
+</div>
+</div>
+<div class="flex-grow">
+<p class="text-on-surface-variant font-label-sm">Alex added to queue 2h ago</p>
+<h4 class="font-bold text-on-surface text-lg">Urban Pulse</h4>
+<p class="text-on-surface-variant font-label-md">The Glass City</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-tertiary/20 transition-all">
+<span class="material-symbols-outlined text-primary">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined text-primary">playlist_add_check</span>
+</button>
+</div>
+</div>
+<!-- Feed Item 3 -->
+<div class="glass-card rounded-xl p-md flex items-center gap-md group">
+<div class="relative shrink-0">
+<img alt="Track Art" class="w-16 h-16 rounded-lg object-cover" data-alt="A warm, out-of-focus background of golden city lights through a rainy window at night. The colors are dominated by deep navy and warm orange embers. It evokes a feeling of being safe and close, fitting for a shared 'romantic' musical discovery track." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ3KidECmFJnt6TKCEDrp5_qZ6bnNAIpyWQgwhY52xZIHHMrH-R9vg4ErAxPVqscx2qLAhy9kmAAJ-7MgSIb7QNmmRCrrYkjqrPatzJ9xxL-X6JYz0LMYmJsqNe6i_eJYVHbCd8zWA3N-SRxyRIT15eBD2rAd4I7btc9NP_zza5qFk64_5KR-LRDDLmZwMvCwIfB6dDLAi21GskLdCahnyOV-G5oBaGKdtqcWj0Qe7WOepJXdnAyemtg"/>
+<div class="absolute -top-1 -right-1 w-6 h-6 border-2 border-background bg-tertiary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-white" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="flex-grow">
+<p class="text-on-surface-variant font-label-sm">Alex liked a track yesterday</p>
+<h4 class="font-bold text-on-surface text-lg">Velvet Rain</h4>
+<p class="text-on-surface-variant font-label-md">Midnight Moods</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-tertiary/20 transition-all">
+<span class="material-symbols-outlined text-primary">play_arrow</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined text-primary">add</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Player / Together Bar -->
+<nav class="fixed bottom-0 w-full z-50">
+<!-- Persistent Player (Together Bar) -->
+<div class="mx-margin-mobile mb-4 glass-card rounded-xl p-sm flex items-center justify-between border-tertiary/20 active-glow">
+<div class="flex items-center gap-sm">
+<img alt="Current Track" class="w-12 h-12 rounded-lg object-cover" data-alt="Minimalist abstract album artwork with soft glowing gradients of rose pink and deep navy blue. The image represents the currently playing track in a premium, intimate music app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMnO-lpw3wuh3CN2_D_EeSFptO_ko0nAw69-Nv3MwoCvqXspPX3jHsmVwm-avCDwYMnLeqOLkhgS3eGAYFIwP7qiPP084iofVJ8T5zfUc0CIwkrCp-OGY8AOTcU3EGoLzv4wTwBY9u_IOrE9tYkPiIbbKty1-BISyBBtH3SDCNJGd3P_IMblFJlCEuOVH1QlXJaJdo4-e6XCJwmGYIn6s_GPA0bXUQ44SbC4pSRHMzJioW3qvViujGUw"/>
+<div class="hidden sm:block">
+<div class="font-bold text-on-surface text-sm">Midnight Reverie</div>
+<div class="text-on-surface-variant text-xs flex items-center gap-base">
+                        Listening with Alex
+                        <span class="w-1.5 h-1.5 bg-tertiary rounded-full animate-pulse"></span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface">skip_previous</button>
+<button class="w-10 h-10 bg-tertiary text-on-tertiary rounded-full flex items-center justify-center shadow-lg shadow-tertiary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<button class="material-symbols-outlined text-on-surface">skip_next</button>
+</div>
+<div class="flex items-center gap-sm pr-2">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">devices</span>
+<span class="material-symbols-outlined text-on-surface-variant text-xl">volume_up</span>
+</div>
+</div>
+<!-- Navigation Shell (Mobile Only) -->
+<div class="md:hidden w-full bg-surface-container-low/60 backdrop-blur-xl px-4 pb-6 pt-2 flex justify-around items-center rounded-t-xl border-t border-secondary/10">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">music_note</span>
+<span class="font-label-sm text-label-sm">Listen</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-sm text-label-sm">Queue</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">subscriptions</span>
+<span class="font-label-sm text-label-sm">Library</span>
+</div>
+<div class="flex flex-col items-center justify-center text-tertiary font-bold bg-tertiary-container/20 rounded-xl px-4 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-sm text-label-sm">Feed</span>
+</div>
+</div>
+</nav>
+<script>
+        // Micro-interactions and subtle glow followers
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Subtle reactive border highlight logic could go here
+                // For this implementation, keeping it lightweight
+            });
+        });
+
+        // Simple mock for "Sync" animation toggle
+        setInterval(() => {
+            const syncDot = document.querySelector('.animate-pulse');
+            if(syncDot) {
+                syncDot.classList.toggle('opacity-50');
+            }
+        }, 1000);
+    </script>
+</body></html>
